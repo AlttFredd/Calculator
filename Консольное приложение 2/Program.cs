@@ -44,16 +44,13 @@ namespace Консольное_приложение_2
                 {
                     while (true)
                     {
-                        Console.WriteLine("Ошибка. Деление на 0 невозможно. Попробуйте использовать другой знак.");
+                        Console.WriteLine("Ошибка. Деление на 0 невозможно. Попробуйте использовать другое значение второго числа.");
                         if (operation == "/")
                         {
-                            operation = "";
-                            numberTwo = 0;
+                            numberTwo = ReadFloat("Введите второе число:");
+                            if (numberTwo != 0) break;
                         }
-                        operation = Console.ReadLine() ?? "";
-                        if (operation != "/") break;
                     }
-                    numberTwo = ReadFloat("Введите второе число:");
                 }
                 if (operation == "+")
                 {
@@ -87,5 +84,3 @@ namespace Консольное_приложение_2
         }
     }
 }
-
-
