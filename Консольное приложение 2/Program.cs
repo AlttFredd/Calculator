@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +42,18 @@ namespace Консольное_приложение_2
                 numberTwo = ReadFloat("Введите второе число:");
                 if (numberTwo == 0 && operation == "/")
                 {
-                    Console.WriteLine("Ошибка. Деление на 0 невозможно. Попробуйте использовать другое число.");
+                    while (true)
+                    {
+                        Console.WriteLine("Ошибка. Деление на 0 невозможно. Попробуйте использовать другой знак.");
+                        if (operation == "/")
+                        {
+                            operation = "";
+                            numberTwo = 0;
+                        }
+                        operation = Console.ReadLine() ?? "";
+                        if (operation != "/") break;
+                    }
+                    numberTwo = ReadFloat("Введите второе число:");
                 }
                 if (operation == "+")
                 {
@@ -62,21 +74,18 @@ namespace Консольное_приложение_2
                 Console.WriteLine("Нажмите любую клавишу для продолжения.");
                 Console.ReadKey();
                 Console.Clear();
-                    Console.WriteLine("Заного? (да / нет)");
+                    Console.WriteLine("Заново? (да / нет)");
                 cycle = (Console.ReadLine() ?? "").Trim().ToLower();
             } while (cycle == "да");
             if (cycle == "нет")
-            {
-                while (true)
-                {
+            { 
                     Console.Clear();
                     Console.WriteLine("Спасибо за использование.");
-                    Console.WriteLine("Вы можете выйти с помощью нажатия любой клавиши, или программа автоматически выключится сама.");
-                    Thread.Sleep(5500);
-                    Console.Clear();
-                }
+                    Console.WriteLine("Вы можете выйти с помощью нажатия любой клавиши.");
+                Console.ReadKey();
             }
         }
     }
 }
+
 
