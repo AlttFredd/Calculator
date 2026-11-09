@@ -76,8 +76,7 @@ namespace Консольное_приложение_2
                         {
                             Console.Clear();
                             numberOne = ReadDecimal("Введите первое число:");
-                            Console.WriteLine("Введите знак (+ - / *)");
-                            ReadOperation();
+                            op = ReadOperation();
                             numberTwo = ReadDecimal("Введите второе число:");
                             if (numberTwo == 0 && op == "/")
                             {
