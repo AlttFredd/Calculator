@@ -1,11 +1,13 @@
 using System;
+using System.Runtime.CompilerServices;
 
 
 namespace Консольное_приложение_2
 {
     internal class Program
     {
-        static decimal ReadFloat(string message)
+        private const int Two = 2;
+        static decimal ReadDecimal(string message)
         {
             while(true)
             {
@@ -24,10 +26,11 @@ namespace Консольное_приложение_2
             decimal numberOne;
             decimal numberTwo;
             string operation;
+            string symbol;
             do
             {
                 Console.Clear();
-                numberOne = ReadFloat("Введите первое число:");
+                numberOne = ReadDecimal("Введите первое число:");
                 while (true)
                 {
                     Console.WriteLine("Введите знак (+ - / *)");
@@ -35,18 +38,45 @@ namespace Консольное_приложение_2
                     if (operation is "+" or "-" or "/" or "*") break;
                     Console.WriteLine("Неизвестная операция. Попробуйте ещё раз.");
                 }
-                numberTwo = ReadFloat("Введите второе число:");
+                numberTwo = ReadDecimal("Введите второе число:");
                 if (numberTwo == 0 && operation == "/")
                 {
-                    while (true)
-                    {
-                        Console.WriteLine("Ошибка. Деление на 0 невозможно. Попробуйте использовать другое значение второго числа.");
-                        if (operation == "/")
+                    Console.WriteLine("Ошибка. Деление на 0 невозможно. Нажмите любую клавишу для продолжения.");
+                    Console.ReadKey();
+                        while (true)
                         {
-                            numberTwo = ReadFloat("Введите второе число:");
-                            if (numberTwo != 0) break;
+                            Console.Clear();
+                            Console.WriteLine("Выберите дальнейшее действие:");
+                            Console.WriteLine("1. Заменить 0 на другое число.");
+                            Console.WriteLine("2. Заменить всё выражние целиком.");
+                            symbol = Console.ReadLine() ?? "";
+                            if (symbol is "1" or "2")
+                            {
+                                break;
+                            }
                         }
-                    }
+                            if (symbol == "1")
+                            {
+                                Console.Clear();
+                                numberTwo = ReadDecimal("Введите второе число:");
+                            }
+                            else if (symbol == "2")
+                            {
+                                Console.Clear();
+                                numberOne = ReadDecimal("Введите первое число:");
+                        Console.WriteLine("Введите знак (+ - / *)");
+                            while (true)
+                            {
+                                operation = Console.ReadLine() ?? "";
+                                if (operation is "+" or "-" or "/" or "*") break;
+                                Console.WriteLine("Неизвестная операция. Попробуйте ещё раз.");
+                            }
+                                numberTwo = ReadDecimal("Введите второе число:");
+                            
+
+                        }
+                    
+
                 }
                 if (operation == "+")
                 {
@@ -74,10 +104,10 @@ namespace Консольное_приложение_2
             { 
                     Console.Clear();
                     Console.WriteLine("Спасибо за использование.");
-                    Console.WriteLine("Вы можете выйти с помощью нажатия любой клавиши.");
+                Console.WriteLine("Вы можете выйти с помощью нажатия любой клавиши.");
                 Console.ReadKey();
             }
         }
     }
 }
- 
+
