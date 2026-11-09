@@ -1,21 +1,17 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Консольное_приложение_2
 {
     internal class Program
     {
-        static float ReadFloat(string message)
+        static decimal ReadFloat(string message)
         {
             while(true)
             {
                 Console.WriteLine(message);
                 string input = (Console.ReadLine() ?? "").Replace(',', '.');
-                if (float.TryParse(input, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float result))
+                if (decimal.TryParse(input, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out decimal result))
                 {
                     return result;
                 }
@@ -25,8 +21,8 @@ namespace Консольное_приложение_2
         static void Main(string[] args)
         {
             string cycle;
-            float numberOne;
-            float numberTwo;
+            decimal numberOne;
+            decimal numberTwo;
             string operation;
             do
             {
@@ -84,3 +80,4 @@ namespace Консольное_приложение_2
         }
     }
 }
+ 
