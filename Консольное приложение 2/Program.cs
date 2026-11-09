@@ -6,7 +6,6 @@ namespace Консольное_приложение_2
 {
     internal class Program
     {
-        private const int Two = 2;
         static decimal ReadDecimal(string message)
         {
             while(true)
