@@ -7,37 +7,42 @@ namespace Консольное_приложение_2
     {
         static decimal ReadDecimal(string message)
         {
-            while(true)
+            while (true)
             {
                 Console.WriteLine(message);
                 string input = (Console.ReadLine() ?? "").Replace(',', '.');
-                if (decimal.TryParse(input, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out decimal result))
+                if (decimal.TryParse(input, System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out decimal result))
                 {
                     return result;
                 }
                 Console.WriteLine("Ошибка. Этот символ не является числом. Попробуйте ещё раз.");
             }
         }
+
+        static string ReadOperation()
+        {
+            while (true)
+            {
+                Console.WriteLine("Введите знак (+ - / *)");
+                string op = Console.ReadLine() ?? "";
+                if (op is "+" or "-" or "/" or "*") return op;
+                Console.WriteLine("Неизвестная операция. Попробуйте ещё раз.");
+            }
+        }
+    
         static void Main(string[] args)
         {
             string cycle;
             decimal numberOne;
             decimal numberTwo;
-            string operation;
             string symbol;
             do
             {
                 Console.Clear();
                 numberOne = ReadDecimal("Введите первое число:");
-                while (true)
-                {
-                    Console.WriteLine("Введите знак (+ - / *)");
-                    operation = Console.ReadLine() ?? "";
-                    if (operation is "+" or "-" or "/" or "*") break;
-                    Console.WriteLine("Неизвестная операция. Попробуйте ещё раз.");
-                }
+                ReadOperation();
                 numberTwo = ReadDecimal("Введите второе число:");
-                if (numberTwo == 0 && operation == "/")
+                if (numberTwo == 0 && ReadOperation() == "/")
                 {
                     Console.WriteLine("Ошибка. Деление на 0 невозможно. Нажмите любую клавишу для продолжения.");
                     Console.ReadKey();
@@ -66,19 +71,14 @@ namespace Консольное_приложение_2
                     }
                             else if (symbol == "2")
                             {
-                        while (numberTwo == 0 && operation == "/")
+                        while (numberTwo == 0 && ReadOperation() == "/")
                         {
                             Console.Clear();
                             numberOne = ReadDecimal("Введите первое число:");
                             Console.WriteLine("Введите знак (+ - / *)");
-                            while (true)
-                            {
-                                operation = Console.ReadLine() ?? "";
-                                if (operation is "+" or "-" or "/" or "*") break;
-                                Console.WriteLine("Неизвестная операция. Попробуйте ещё раз.");
-                            }
+                            ReadOperation();
                             numberTwo = ReadDecimal("Введите второе число:");
-                            if (numberTwo == 0 && operation == "/")
+                            if (numberTwo == 0 && ReadOperation() == "/")
                             {
                                 Console.WriteLine("Ошибка. Деление на ноль невозможно.");
                                 Console.WriteLine("Нажмите любую клавишу для повторного введения данных.");
@@ -91,19 +91,19 @@ namespace Консольное_приложение_2
                     
 
                 }
-                if (operation == "+")
+                if (ReadOperation() == "+")
                 {
                     Console.WriteLine($"Результат: {numberOne + numberTwo}");
                 }
-                else if (operation == "-")
+                else if (ReadOperation() == "-")
                 {
                     Console.WriteLine($"Результат: {numberOne - numberTwo}");
                 }
-                else if (operation == "/")
+                else if (ReadOperation() == "/")
                 {
                     Console.WriteLine($"Результат: {numberOne / numberTwo}");
                 }
-                else if (operation == "*")
+                else if (ReadOperation() == "*")
                 {
                     Console.WriteLine($"Результат: {numberOne * numberTwo}");
                 }
@@ -123,4 +123,3 @@ namespace Консольное_приложение_2
         }
     }
 }
-
