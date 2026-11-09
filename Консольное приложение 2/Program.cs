@@ -36,32 +36,33 @@ namespace Консольное_приложение_2
             decimal numberOne;
             decimal numberTwo;
             string symbol;
+            string op;
             do
             {
                 Console.Clear();
                 numberOne = ReadDecimal("Введите первое число:");
-                ReadOperation();
+                op = ReadOperation();
                 numberTwo = ReadDecimal("Введите второе число:");
-                if (numberTwo == 0 && ReadOperation() == "/")
+                if (numberTwo == 0 && op == "/")
                 {
                     Console.WriteLine("Ошибка. Деление на 0 невозможно. Нажмите любую клавишу для продолжения.");
                     Console.ReadKey();
-                        while (true)
+                    while (true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Выберите дальнейшее действие:");
+                        Console.WriteLine("1. Заменить 0 на другое число.");
+                        Console.WriteLine("2. Заменить всё выражение целиком.");
+                        symbol = Console.ReadLine() ?? "";
+                        if (symbol is "1" or "2")
                         {
-                            Console.Clear();
-                            Console.WriteLine("Выберите дальнейшее действие:");
-                            Console.WriteLine("1. Заменить 0 на другое число.");
-                            Console.WriteLine("2. Заменить всё выражение целиком.");
-                            symbol = Console.ReadLine() ?? "";
-                            if (symbol is "1" or "2")
-                            {
-                                break;
-                            }
+                            break;
+                        }
                         else Console.WriteLine("Ошибка ввода. Можно ввести только 1 или 2. Попробуйте снова.");
                     }
-                            if (symbol == "1")
-                            {
-                                Console.Clear();
+                    if (symbol == "1")
+                    {
+                        Console.Clear();
                         while (true)
                         {
                             numberTwo = ReadDecimal("Введите второе число:");
@@ -69,16 +70,16 @@ namespace Консольное_приложение_2
                             else Console.WriteLine("Ошибка. Выберите другое число и попробуйте снова.");
                         }
                     }
-                            else if (symbol == "2")
-                            {
-                        while (numberTwo == 0 && ReadOperation() == "/")
+                    else if (symbol == "2")
+                    {
+                        while (numberTwo == 0 && op == "/")
                         {
                             Console.Clear();
                             numberOne = ReadDecimal("Введите первое число:");
                             Console.WriteLine("Введите знак (+ - / *)");
                             ReadOperation();
                             numberTwo = ReadDecimal("Введите второе число:");
-                            if (numberTwo == 0 && ReadOperation() == "/")
+                            if (numberTwo == 0 && op == "/")
                             {
                                 Console.WriteLine("Ошибка. Деление на ноль невозможно.");
                                 Console.WriteLine("Нажмите любую клавишу для повторного введения данных.");
@@ -88,30 +89,36 @@ namespace Консольное_приложение_2
 
 
                     }
-                    
+
 
                 }
-                if (ReadOperation() == "+")
+                if (op == "+")
                 {
                     Console.WriteLine($"Результат: {numberOne + numberTwo}");
                 }
-                else if (ReadOperation() == "-")
+                else if (op == "-")
                 {
                     Console.WriteLine($"Результат: {numberOne - numberTwo}");
                 }
-                else if (ReadOperation() == "/")
+                else if (op == "/")
                 {
                     Console.WriteLine($"Результат: {numberOne / numberTwo}");
                 }
-                else if (ReadOperation() == "*")
+                else if (op == "*")
                 {
                     Console.WriteLine($"Результат: {numberOne * numberTwo}");
                 }
                 Console.WriteLine("Нажмите любую клавишу для продолжения.");
                 Console.ReadKey();
-                Console.Clear();
+                while (true)
+                {
+                    Console.Clear();
                     Console.WriteLine("Заново? (да / нет)");
-                cycle = (Console.ReadLine() ?? "").Trim().ToLower();
+                    cycle = (Console.ReadLine() ?? "").Trim().ToLower();
+                    if (cycle is "да" or "нет") break;
+                    else Console.WriteLine("Ошибка. Можно использовать только да или нет. Нажмите любую клавишу для повторной попытки.");
+                    Console.ReadKey();
+                }
             } while (cycle == "да");
             if (cycle == "нет")
             { 
